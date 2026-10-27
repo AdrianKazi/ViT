@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+.gradio/
+
+logs/
+assets/*.log
+
+# model weights (published separately, e.g. on the Hugging Face Hub)
+checkpoints/
+*.pt
+*.safetensors

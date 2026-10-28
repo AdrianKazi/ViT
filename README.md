@@ -42,11 +42,15 @@ $$z_0 = [x_{class};\ x_p^1E;\ x_p^2E;\ \dots;\ x_p^NE] + E_{pos}$$
 | Model | Pre-training | Fine-tuning | Top-1 |
 |---|---|---|---|
 | Our ViT (D=256, 12 blocks, patch 4) | none (from scratch, 200 epochs) | - | 57.7% |
-| Our ViT-B/16 | ImageNet-21k (official weights) | 224 px, 500 steps, lr 0.03 | see `assets/results.png` |
+| Our ViT-B/16 | ImageNet-21k (official weights) | 224 px, 500 steps, lr 0.03 | **91.3%** (top-5 99.0%) |
 | Paper ViT-L/16 | ImageNet-21k | 384 px, 10k steps | 93.25% |
 | Paper ViT-H/14 | JFT-300M | 384 px, 10k steps | 94.55% |
 
 Training from scratch reproduces the paper's main observation: without large-scale pre-training ViT lacks the inductive biases of CNNs and overfits small datasets (train 99.97% vs test 57.7%). Transfer from ImageNet-21k closes most of the gap.
+
+![Results vs paper](assets/results.png)
+
+Fine-tuned weights: [huggingface.co/AdrianSK/vit-b16-in21k-cifar100](https://huggingface.co/AdrianSK/vit-b16-in21k-cifar100)
 
 ## Structure
 

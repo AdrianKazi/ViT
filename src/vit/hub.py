@@ -49,9 +49,26 @@ Vision Transformer ([Dosovitskiy et al., 2021](https://arxiv.org/abs/2010.11929)
 
 ## Usage
 
+```bash
+pip install git+{code}
+```
+
 ```python
+import torch
+from PIL import Image
+from datasets import load_dataset_builder
+from vit.data import finetune_transforms
 from vit.hub import from_pretrained
-model = from_pretrained("{repo}")   # needs the `vit` package from {code}
+
+model = from_pretrained("{repo}").eval()
+names = load_dataset_builder("uoft-cs/cifar100").info.features["fine_label"].names
+_, tf = finetune_transforms({img_size})
+
+img = Image.open("image.jpg").convert("RGB")
+with torch.no_grad():
+    probs = model(tf(img)[None]).softmax(-1)[0]
+for p, i in zip(*probs.topk(5)):
+    print(f"{{names[i]:15s}} {{p:.3f}}")
 ```
 
 Inputs: RGB images resized to {img_size}x{img_size}, pixels scaled to [-1, 1]. Classes: the 100 CIFAR-100 fine labels.
